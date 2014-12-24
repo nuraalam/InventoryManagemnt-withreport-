@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b6ad789a2046400bb62dd79d4ca4b8d3" Name="Diagram1">
+        <EntityTypeShape EntityType="InventoryDbModel.ClientInformation" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryDbModel.ItemCategory" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryDbModel.ItemInformation" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryDbModel.SupplierInformation" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
+        <AssociationConnector Association="InventoryDbModel.FK_dbo_ItemInformations_dbo_ItemCategories_ItemCategoryId" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="InventoryDbModel.ItemType" Width="1.5" PointX="0.75" PointY="11.125" />
+        <EntityTypeShape EntityType="InventoryDbModel.Uom" Width="1.5" PointX="0.75" PointY="8.875" />
+        <AssociationConnector Association="InventoryDbModel.FK_dbo_ItemInformations_dbo_ItemTypes_ItemTypeId" />
+        <AssociationConnector Association="InventoryDbModel.FK_dbo_ItemInformations_dbo_Uoms_UomId" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

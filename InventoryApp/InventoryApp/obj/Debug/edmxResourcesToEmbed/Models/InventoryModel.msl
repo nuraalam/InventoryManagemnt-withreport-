@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="InventoryDbModelStoreContainer" CdmEntityContainer="InventoryDbEntities">
+    <EntitySetMapping Name="ClientInformations">
+      <EntityTypeMapping TypeName="InventoryDbModel.ClientInformation">
+        <MappingFragment StoreEntitySet="ClientInformations">
+          <ScalarProperty Name="ClientInformationId" ColumnName="ClientInformationId" />
+          <ScalarProperty Name="ClientCode" ColumnName="ClientCode" />
+          <ScalarProperty Name="ClientName" ColumnName="ClientName" />
+          <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
+          <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ItemCategories">
+      <EntityTypeMapping TypeName="InventoryDbModel.ItemCategory">
+        <MappingFragment StoreEntitySet="ItemCategories">
+          <ScalarProperty Name="ItemCategoryId" ColumnName="ItemCategoryId" />
+          <ScalarProperty Name="ItemCategoryCode" ColumnName="ItemCategoryCode" />
+          <ScalarProperty Name="ItemCategoryName" ColumnName="ItemCategoryName" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ItemInformations">
+      <EntityTypeMapping TypeName="InventoryDbModel.ItemInformation">
+        <MappingFragment StoreEntitySet="ItemInformations">
+          <ScalarProperty Name="ItemInformationId" ColumnName="ItemInformationId" />
+          <ScalarProperty Name="ItemCode" ColumnName="ItemCode" />
+          <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="ItemCategoryId" ColumnName="ItemCategoryId" />
+          <ScalarProperty Name="ItemTypeId" ColumnName="ItemTypeId" />
+          <ScalarProperty Name="UomId" ColumnName="UomId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SupplierInformations">
+      <EntityTypeMapping TypeName="InventoryDbModel.SupplierInformation">
+        <MappingFragment StoreEntitySet="SupplierInformations">
+          <ScalarProperty Name="SupplierInformationId" ColumnName="SupplierInformationId" />
+          <ScalarProperty Name="SupplierCode" ColumnName="SupplierCode" />
+          <ScalarProperty Name="SupplierName" ColumnName="SupplierName" />
+          <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
+          <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ItemTypes">
+      <EntityTypeMapping TypeName="InventoryDbModel.ItemType">
+        <MappingFragment StoreEntitySet="ItemTypes">
+          <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+          <ScalarProperty Name="ItemTypeId" ColumnName="ItemTypeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Uoms">
+      <EntityTypeMapping TypeName="InventoryDbModel.Uom">
+        <MappingFragment StoreEntitySet="Uoms">
+          <ScalarProperty Name="UomName" ColumnName="UomName" />
+          <ScalarProperty Name="UomId" ColumnName="UomId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

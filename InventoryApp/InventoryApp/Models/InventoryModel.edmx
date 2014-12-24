@@ -1,0 +1,360 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="InventoryDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ClientInformations">
+          <Key>
+            <PropertyRef Name="ClientInformationId" />
+          </Key>
+          <Property Name="ClientInformationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClientCode" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ClientName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ContactPerson" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="MobileNumber" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CreatedDateTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ItemCategories">
+          <Key>
+            <PropertyRef Name="ItemCategoryId" />
+          </Key>
+          <Property Name="ItemCategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ItemCategoryCode" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ItemCategoryName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Remarks" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="ItemInformations">
+          <Key>
+            <PropertyRef Name="ItemInformationId" />
+          </Key>
+          <Property Name="ItemInformationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ItemCode" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ItemName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Remarks" Type="nvarchar(max)" />
+          <Property Name="ItemCategoryId" Type="int" Nullable="false" />
+          <Property Name="ItemTypeId" Type="int" Nullable="false" />
+          <Property Name="UomId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ItemTypes">
+          <Key>
+            <PropertyRef Name="ItemTypeId" />
+          </Key>
+          <Property Name="ItemTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ItemName" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="SupplierInformations">
+          <Key>
+            <PropertyRef Name="SupplierInformationId" />
+          </Key>
+          <Property Name="SupplierInformationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SupplierCode" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="SupplierName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ContactPerson" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="MobileNumber" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CreatedDateTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Uoms">
+          <Key>
+            <PropertyRef Name="UomId" />
+          </Key>
+          <Property Name="UomId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UomName" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="FK_dbo_ItemInformations_dbo_ItemCategories_ItemCategoryId">
+          <End Role="ItemCategories" Type="Self.ItemCategories" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ItemInformations" Type="Self.ItemInformations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemCategories">
+              <PropertyRef Name="ItemCategoryId" />
+            </Principal>
+            <Dependent Role="ItemInformations">
+              <PropertyRef Name="ItemCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ItemInformations_dbo_ItemTypes_ItemTypeId">
+          <End Role="ItemTypes" Type="Self.ItemTypes" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ItemInformations" Type="Self.ItemInformations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemTypes">
+              <PropertyRef Name="ItemTypeId" />
+            </Principal>
+            <Dependent Role="ItemInformations">
+              <PropertyRef Name="ItemTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ItemInformations_dbo_Uoms_UomId">
+          <End Role="Uoms" Type="Self.Uoms" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ItemInformations" Type="Self.ItemInformations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Uoms">
+              <PropertyRef Name="UomId" />
+            </Principal>
+            <Dependent Role="ItemInformations">
+              <PropertyRef Name="UomId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="InventoryDbModelStoreContainer">
+          <EntitySet Name="ClientInformations" EntityType="Self.ClientInformations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ItemCategories" EntityType="Self.ItemCategories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ItemInformations" EntityType="Self.ItemInformations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ItemTypes" EntityType="Self.ItemTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SupplierInformations" EntityType="Self.SupplierInformations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Uoms" EntityType="Self.Uoms" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_dbo_ItemInformations_dbo_ItemCategories_ItemCategoryId" Association="Self.FK_dbo_ItemInformations_dbo_ItemCategories_ItemCategoryId">
+            <End Role="ItemCategories" EntitySet="ItemCategories" />
+            <End Role="ItemInformations" EntitySet="ItemInformations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ItemInformations_dbo_ItemTypes_ItemTypeId" Association="Self.FK_dbo_ItemInformations_dbo_ItemTypes_ItemTypeId">
+            <End Role="ItemTypes" EntitySet="ItemTypes" />
+            <End Role="ItemInformations" EntitySet="ItemInformations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ItemInformations_dbo_Uoms_UomId" Association="Self.FK_dbo_ItemInformations_dbo_Uoms_UomId">
+            <End Role="Uoms" EntitySet="Uoms" />
+            <End Role="ItemInformations" EntitySet="ItemInformations" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="InventoryDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ClientInformation">
+          <Key>
+            <PropertyRef Name="ClientInformationId" />
+          </Key>
+          <Property Name="ClientInformationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClientCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ClientName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ContactPerson" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MobileNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreatedDateTime" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="ItemCategory">
+          <Key>
+            <PropertyRef Name="ItemCategoryId" />
+          </Key>
+          <Property Name="ItemCategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ItemCategoryCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ItemCategoryName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ItemInformations" Relationship="Self.FK_dbo_ItemInformations_dbo_ItemCategories_ItemCategoryId" FromRole="ItemCategories" ToRole="ItemInformations" />
+        </EntityType>
+        <EntityType Name="ItemInformation">
+          <Key>
+            <PropertyRef Name="ItemInformationId" />
+          </Key>
+          <Property Name="ItemInformationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ItemCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ItemName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ItemCategoryId" Type="Int32" Nullable="false" />
+          <Property Name="ItemTypeId" Type="Int32" Nullable="false" />
+          <Property Name="UomId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ItemCategory" Relationship="Self.FK_dbo_ItemInformations_dbo_ItemCategories_ItemCategoryId" FromRole="ItemInformations" ToRole="ItemCategories" />
+          <NavigationProperty Name="ItemType" Relationship="InventoryDbModel.FK_dbo_ItemInformations_dbo_ItemTypes_ItemTypeId" FromRole="ItemInformation" ToRole="ItemType" />
+          <NavigationProperty Name="Uom" Relationship="InventoryDbModel.FK_dbo_ItemInformations_dbo_Uoms_UomId" FromRole="ItemInformation" ToRole="Uom" />
+        </EntityType>
+        <EntityType Name="SupplierInformation">
+          <Key>
+            <PropertyRef Name="SupplierInformationId" />
+          </Key>
+          <Property Name="SupplierInformationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SupplierCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SupplierName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ContactPerson" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MobileNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreatedDateTime" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <Association Name="FK_dbo_ItemInformations_dbo_ItemCategories_ItemCategoryId">
+          <End Role="ItemCategories" Type="Self.ItemCategory" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ItemInformations" Type="Self.ItemInformation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemCategories">
+              <PropertyRef Name="ItemCategoryId" />
+            </Principal>
+            <Dependent Role="ItemInformations">
+              <PropertyRef Name="ItemCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="InventoryDbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ClientInformations" EntityType="Self.ClientInformation" />
+          <EntitySet Name="ItemCategories" EntityType="Self.ItemCategory" />
+          <EntitySet Name="ItemInformations" EntityType="Self.ItemInformation" />
+          <EntitySet Name="SupplierInformations" EntityType="Self.SupplierInformation" />
+          <AssociationSet Name="FK_dbo_ItemInformations_dbo_ItemCategories_ItemCategoryId" Association="Self.FK_dbo_ItemInformations_dbo_ItemCategories_ItemCategoryId">
+            <End Role="ItemCategories" EntitySet="ItemCategories" />
+            <End Role="ItemInformations" EntitySet="ItemInformations" />
+          </AssociationSet>
+          <EntitySet Name="ItemTypes" EntityType="InventoryDbModel.ItemType" />
+          <EntitySet Name="Uoms" EntityType="InventoryDbModel.Uom" />
+          <AssociationSet Name="FK_dbo_ItemInformations_dbo_ItemTypes_ItemTypeId" Association="InventoryDbModel.FK_dbo_ItemInformations_dbo_ItemTypes_ItemTypeId">
+            <End Role="ItemType" EntitySet="ItemTypes" />
+            <End Role="ItemInformation" EntitySet="ItemInformations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ItemInformations_dbo_Uoms_UomId" Association="InventoryDbModel.FK_dbo_ItemInformations_dbo_Uoms_UomId">
+            <End Role="Uom" EntitySet="Uoms" />
+            <End Role="ItemInformation" EntitySet="ItemInformations" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="ItemType">
+          <Key>
+            <PropertyRef Name="ItemTypeId" />
+          </Key>
+          <Property Name="ItemTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ItemName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ItemInformations" Relationship="InventoryDbModel.FK_dbo_ItemInformations_dbo_ItemTypes_ItemTypeId" FromRole="ItemType" ToRole="ItemInformation" />
+        </EntityType>
+        <EntityType Name="Uom">
+          <Key>
+            <PropertyRef Name="UomId" />
+          </Key>
+          <Property Name="UomId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UomName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ItemInformations" Relationship="InventoryDbModel.FK_dbo_ItemInformations_dbo_Uoms_UomId" FromRole="Uom" ToRole="ItemInformation" />
+        </EntityType>
+        <Association Name="FK_dbo_ItemInformations_dbo_ItemTypes_ItemTypeId">
+          <End Type="InventoryDbModel.ItemType" Role="ItemType" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="InventoryDbModel.ItemInformation" Role="ItemInformation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemType">
+              <PropertyRef Name="ItemTypeId" />
+            </Principal>
+            <Dependent Role="ItemInformation">
+              <PropertyRef Name="ItemTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ItemInformations_dbo_Uoms_UomId">
+          <End Type="InventoryDbModel.Uom" Role="Uom" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="InventoryDbModel.ItemInformation" Role="ItemInformation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Uom">
+              <PropertyRef Name="UomId" />
+            </Principal>
+            <Dependent Role="ItemInformation">
+              <PropertyRef Name="UomId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="InventoryDbModelStoreContainer" CdmEntityContainer="InventoryDbEntities">
+          <EntitySetMapping Name="ClientInformations">
+            <EntityTypeMapping TypeName="InventoryDbModel.ClientInformation">
+              <MappingFragment StoreEntitySet="ClientInformations">
+                <ScalarProperty Name="ClientInformationId" ColumnName="ClientInformationId" />
+                <ScalarProperty Name="ClientCode" ColumnName="ClientCode" />
+                <ScalarProperty Name="ClientName" ColumnName="ClientName" />
+                <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ItemCategories">
+            <EntityTypeMapping TypeName="InventoryDbModel.ItemCategory">
+              <MappingFragment StoreEntitySet="ItemCategories">
+                <ScalarProperty Name="ItemCategoryId" ColumnName="ItemCategoryId" />
+                <ScalarProperty Name="ItemCategoryCode" ColumnName="ItemCategoryCode" />
+                <ScalarProperty Name="ItemCategoryName" ColumnName="ItemCategoryName" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ItemInformations">
+            <EntityTypeMapping TypeName="InventoryDbModel.ItemInformation">
+              <MappingFragment StoreEntitySet="ItemInformations">
+                <ScalarProperty Name="ItemInformationId" ColumnName="ItemInformationId" />
+                <ScalarProperty Name="ItemCode" ColumnName="ItemCode" />
+                <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="ItemCategoryId" ColumnName="ItemCategoryId" />
+                <ScalarProperty Name="ItemTypeId" ColumnName="ItemTypeId" />
+                <ScalarProperty Name="UomId" ColumnName="UomId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SupplierInformations">
+            <EntityTypeMapping TypeName="InventoryDbModel.SupplierInformation">
+              <MappingFragment StoreEntitySet="SupplierInformations">
+                <ScalarProperty Name="SupplierInformationId" ColumnName="SupplierInformationId" />
+                <ScalarProperty Name="SupplierCode" ColumnName="SupplierCode" />
+                <ScalarProperty Name="SupplierName" ColumnName="SupplierName" />
+                <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ItemTypes">
+            <EntityTypeMapping TypeName="InventoryDbModel.ItemType">
+              <MappingFragment StoreEntitySet="ItemTypes">
+                <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+                <ScalarProperty Name="ItemTypeId" ColumnName="ItemTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Uoms">
+            <EntityTypeMapping TypeName="InventoryDbModel.Uom">
+              <MappingFragment StoreEntitySet="Uoms">
+                <ScalarProperty Name="UomName" ColumnName="UomName" />
+                <ScalarProperty Name="UomId" ColumnName="UomId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
